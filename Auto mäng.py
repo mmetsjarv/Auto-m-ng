@@ -1,18 +1,18 @@
 import pygame
 import random
 
-# 1. Mängu algseadistamine
+# Mängu algseadistamine
 pygame.init()
 ekraani_laius = 640
 ekraani_korgus = 480
 ekraan = pygame.display.set_mode((ekraani_laius, ekraani_korgus))
 pygame.display.set_caption("Auto mäng - Metsjärv")
 
-# 2. Värvid ja tekst
+# Värvid ja tekst
 valge = (255, 255, 255)
 font = pygame.font.SysFont("comicsansms", 24)
 
-# 3. Laeme pildid
+# Lisame pildid
 taust = pygame.image.load("bg_rally.jpg")
 punane_auto_pilt = pygame.image.load("f1_red.png")
 sinine_auto_pilt = pygame.image.load("f1_blue.png")
@@ -21,7 +21,7 @@ sinine_auto_pilt = pygame.image.load("f1_blue.png")
 punane_auto_pilt = pygame.transform.scale(punane_auto_pilt, (50, 80))
 sinine_auto_pilt = pygame.transform.scale(sinine_auto_pilt, (50, 80))
 
-# 4. Autode positsioonid
+# Autode positsioonid
 punane_x = ekraani_laius // 2 - 25
 punane_y = ekraani_korgus - 100
 
@@ -43,10 +43,10 @@ while mang_kaib:
         if sündmus.type == pygame.QUIT:
             mang_kaib = False
 
-    # 5. Joonistame tausta
+    # Lisame tausta
     ekraan.blit(taust, (0, 0))
 
-    # 6. Siniste autode liigutamine ja skoori lugemine
+    # Siniste autode liikumine ja skoori lugemine
     for auto in sinised_autod:
         # Liigutame autot alla
         auto[1] += auto[2]
@@ -60,10 +60,10 @@ while mang_kaib:
         # Joonistame sinise auto
         ekraan.blit(sinine_auto_pilt, (auto[0], auto[1]))
 
-    # 7. Joonistame punase auto (püsib keskel all)
+    # Joonistame punase auto (püsib keskel all)
     ekraan.blit(punane_auto_pilt, (punane_x, punane_y))
 
-    # 8. Skoori kuvamine (teisendamine tekstiks)
+    # Skoori kuvamine (teisendamine tekstiks)
     skoori_tekst = font.render("Skoor: " + str(skoor), True, valge)
     ekraan.blit(skoori_tekst, (10, 10))
 
