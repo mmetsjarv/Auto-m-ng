@@ -9,7 +9,7 @@ ekraan = pygame.display.set_mode((ekraani_laius, ekraani_korgus))
 pygame.display.set_caption("Auto mäng - Metsjärv")
 
 # Värvid ja tekst
-valge = (255, 255, 255)
+valge = (0, 102, 51)
 font = pygame.font.SysFont("comicsansms", 24)
 
 # Lisame pildid
