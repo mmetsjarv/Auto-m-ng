@@ -12,23 +12,23 @@ pygame.display.set_caption("Auto mäng - Metsjärv")
 valge = (255, 255, 255)
 font = pygame.font.SysFont("comicsansms", 24)
 
-# 3. Laeme pildid (veendu, et failinimed on õiged!)
+# 3. Laeme pildid
 taust = pygame.image.load("bg_rally.jpg")
 punane_auto_pilt = pygame.image.load("f1_red.png")
 sinine_auto_pilt = pygame.image.load("f1_blue.png")
 
-# Muudame piltide suurust vajadusel (valikuline)
+# Muudame piltide suurust
 punane_auto_pilt = pygame.transform.scale(punane_auto_pilt, (50, 80))
 sinine_auto_pilt = pygame.transform.scale(sinine_auto_pilt, (50, 80))
 
-# 4. Tegelaste positsioonid
+# 4. Autode positsioonid
 punane_x = ekraani_laius // 2 - 25
 punane_y = ekraani_korgus - 100
 
-# Siniste autode list (et neid oleks mitu ja erinevatel kõrgustel)
+# Siniste autode list
 sinised_autod = []
 for i in range(3):
-    x = random.randint(150, 450) # Tee vahemik (muuda vastavalt oma taustale)
+    x = random.randint(90, 600) # Tee vahemik
     y = random.randint(-500, -100)
     kiirus = random.randint(3, 7)
     sinised_autod.append([x, y, kiirus])
@@ -37,7 +37,7 @@ skoor = 0
 kell = pygame.time.Clock()
 mang_kaib = True
 
-# --- MÄNGU PÕHITSÜKKEL ---
+# Mängu põhitsükkel
 while mang_kaib:
     for sündmus in pygame.event.get():
         if sündmus.type == pygame.QUIT:
@@ -48,7 +48,7 @@ while mang_kaib:
 
     # 6. Siniste autode liigutamine ja skoori lugemine
     for auto in sinised_autod:
-        # Liigutame autot alla (y-telg suureneb)
+        # Liigutame autot alla
         auto[1] += auto[2]
 
         # Kui auto jõuab ekraani alla välja
