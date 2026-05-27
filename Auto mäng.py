@@ -10,7 +10,7 @@ pygame.display.set_caption("Auto mäng - Metsjärv")
 
 # Värvid ja tekst
 valge = (0, 102, 51)
-font = pygame.font.SysFont("comicsansms", 24)
+font = pygame.font.SysFont("Comic Sans MS", 24, bold=True)
 
 # Lisame pildid
 taust = pygame.image.load("bg_rally.jpg")
