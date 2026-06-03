@@ -9,7 +9,7 @@ ekraan = pygame.display.set_mode((ekraani_laius, ekraani_korgus))
 pygame.display.set_caption("Auto mäng - Metsjärv")
 
 # Värvid ja tekst
-valge = (0, 102, 51)
+tekst = (0, 102, 51)
 font = pygame.font.SysFont("Comic Sans MS", 24, bold=True)
 
 # Lisame pildid
@@ -25,13 +25,18 @@ sinine_auto_pilt = pygame.transform.scale(sinine_auto_pilt, (50, 80))
 punane_x = ekraani_laius // 2 - 25
 punane_y = ekraani_korgus - 100
 
-# Siniste autode list
-sinised_autod = []
-for i in range(3):
-    x = random.randint(90, 600) # Tee vahemik
-    y = random.randint(-500, -100)
-    kiirus = random.randint(3, 7)
-    sinised_autod.append([x, y, kiirus])
+# Radade keskpunktid
+rajad = [180, 300, 420]
+
+# Rajad
+rajad = [180, 300, 420]
+
+# Sinised autod (igaüks oma rajal)
+sinised_autod = [
+    [rajad[0], -100, 5],
+    [rajad[1], -300, 6],
+    [rajad[2], -500, 7]
+]
 
 skoor = 0
 kell = pygame.time.Clock()
@@ -53,10 +58,22 @@ while mang_kaib:
 
         # Kui auto jõuab ekraani alla välja
         if auto[1] > ekraani_korgus:
-            auto[1] = random.randint(-200, -50) # Uus algus kõrgemal
-            auto[0] = random.randint(150, 450)  # Uus juhuslik tee koht
-            skoor += 1  # Lisame punkti
+            auto[1] = random.randint(-500, -100)
 
+            # vali rada, kus pole teist autot liiga lähedal
+            vabad_rajad = rajad.copy()
+
+            for teine_auto in sinised_autod:
+                if teine_auto != auto and teine_auto[0] in vabad_rajad:
+                    if teine_auto[1] < 150:
+                        vabad_rajad.remove(teine_auto[0])
+
+            if vabad_rajad:
+                auto[0] = random.choice(vabad_rajad)
+            else:
+                auto[0] = random.choice(rajad)
+
+            skoor += 1
         # Joonistame sinise auto
         ekraan.blit(sinine_auto_pilt, (auto[0], auto[1]))
 
@@ -64,7 +81,7 @@ while mang_kaib:
     ekraan.blit(punane_auto_pilt, (punane_x, punane_y))
 
     # Skoori kuvamine (teisendamine tekstiks)
-    skoori_tekst = font.render("Skoor: " + str(skoor), True, valge)
+    skoori_tekst = font.render("Skoor: " + str(skoor), True, tekst)
     ekraan.blit(skoori_tekst, (10, 10))
 
     # Ekraani uuendamine
